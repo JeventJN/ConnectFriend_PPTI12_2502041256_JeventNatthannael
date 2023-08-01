@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('number');
             $table->string('password');
             $table->string('image');
-            $table->decimal('price')->default(125000);
+            $table->unsignedInteger('price')->default(DB::raw('FLOOR(100000 + RAND() * 25000)'));
+            $table->decimal('wallet')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

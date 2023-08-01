@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\processPayment;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,11 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::view('/payment', 'payment')->name('payment');
+Route::post('/process-payment', [processPayment::class, 'processPayment'])->name('processPayment');
+
+Route::get('/logout', [LoginController::class, 'logout']);
+
 Route::get('/homeMan', function () {
     return view('man.home');
 })->middleware('checkman');
@@ -37,4 +44,10 @@ Route::get('/homeMan', function () {
 Route::get('/homeWoman', function () {
     return view('woman.home');
 })->middleware('checkwoman');
+
+Route::group(['prefix' => 'homeMan', 'middleware' => 'checkman'], function(){
+    Route::get('/matching', [UserController::class, 'userIndex']);
+    Route::get('/matching-detail/{user_id}', [UserController::class, 'match']);
+    Route::put('/top-up', [UserController::class, 'topup']);
+});
 

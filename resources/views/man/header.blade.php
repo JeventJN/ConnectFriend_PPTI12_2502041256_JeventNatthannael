@@ -12,8 +12,8 @@
             </a>
         </div>
         <div class="ml-[10vw] w-[10vw] h-fit rounded-[10vw] flex justify-center hover:bg-slate-500">
-            <a href="/logout">
-                Log Out
+            <a href="/logout" type="button">
+                LogOut
             </a>
         </div>
     </div>
