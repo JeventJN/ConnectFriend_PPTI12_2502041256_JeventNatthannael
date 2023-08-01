@@ -15,10 +15,22 @@ class UserController extends Controller
         return view('man.matching', compact('users'));
     }
 
+    public function userIndex1() {
+        $users = User::all();
+
+        return view('woman.matching', compact('users'));
+    }
+
     public function match($id){
         $match = User::findOrFail($id);
 
         return view('man.matching-detail', compact('match'));
+    }
+
+    public function match1($id){
+        $match = User::findOrFail($id);
+
+        return view('woman.matching-detail', compact('match'));
     }
 
     public function update(Request $request){
@@ -46,5 +58,14 @@ class UserController extends Controller
         $user->update();
 
         return redirect('/homeMan');
+    }
+
+    public function topup1(Request $request){
+        $user = User::find(auth()->user()->id);
+
+        $user->wallet = $user->wallet + $request->wallet;
+        $user->update();
+
+        return redirect('/homeWoman');
     }
 }

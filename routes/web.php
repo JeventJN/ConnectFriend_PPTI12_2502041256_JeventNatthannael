@@ -51,3 +51,9 @@ Route::group(['prefix' => 'homeMan', 'middleware' => 'checkman'], function(){
     Route::put('/top-up', [UserController::class, 'topup']);
 });
 
+Route::group(['prefix' => 'homeWoman', 'middleware' => 'checkwoman'], function(){
+    Route::get('/matching', [UserController::class, 'userIndex1']);
+    Route::get('/matching-detail/{user_id}', [UserController::class, 'match1']);
+    Route::put('/top-up', [UserController::class, 'topup1']);
+});
+
